@@ -1,9 +1,9 @@
 // == Import npm
 import React from 'react';
-import { Row, CardDeck } from 'react-bootstrap';
+import { Row, CardDeck, Button, Modal } from 'react-bootstrap';
 
 // == Import
-import UserCard from './UserCard'
+import UserCard from './index.js'
 import PropTypes from 'prop-types';
 // import './style.scss';
 
@@ -19,6 +19,7 @@ return (
                     ))
                 }
             </CardDeck>
+            <Button variant="info">Info</Button>            
         </Row>
     </div>
 );

@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 // == Composant
 const UserCard = ({ name, expenses }) => {
 return (
-    <Card style={{ minWidth: '15rem' }}>
+    <Card style={{ minWidth: '9rem' }}>
         <Card.Header>{name}</Card.Header>
         <ListGroup variant="flush">
             {
