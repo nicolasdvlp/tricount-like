@@ -5,18 +5,18 @@ import { connect } from 'react-redux';
 import Main from '../components/Main';
 
 // Action Creators
-import { displayModal } from '../actions/modal';
+import { swtchView } from '../actions/switchView'
 
 // === State (data) ===
 const mapStateToProps = (state) => ({
-    ...state
+  switchResultPage: state.main.switchResultPage
 });
 
 // === Actions ===
 const mapDispatchToProps = (dispatch) => ({
-    switchModal: () => {
-    dispatch(displayModal());
-  },
+  clickChangeView: () => {
+    dispatch(swtchView());
+  }
 });
 
 // Container

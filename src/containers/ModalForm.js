@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import ModalForm from '../components/ModalForm';
 
 // Action Creators
-import { displayModal, addUser, updateInput } from '../actions/modal';
+import { displayModal, addUser, updateInput } from '../actions/card';
 
 // === State (data) ===
 const mapStateToProps = (state) => ({

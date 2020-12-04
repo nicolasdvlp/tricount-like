@@ -1,47 +1,38 @@
 // == Import npm
 import React from 'react';
-import { Row, CardDeck, Button, Col, Container } from 'react-bootstrap';
+import { Form  } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 // == Import
 import './style.scss';
-import UserCard from '../UserCard';
+import UserList from '../../containers/UserList';
+import ResultView from '../Result'
 
 // == Composant
-const Main = ({ main, switchModal }) => {
-    const { users } = main;
+const Main = ({ switchResultPage, clickChangeView }) => {
     return (
-        <Container className={Main.name.toLowerCase()}>
-        
-            <Row className="justify-content-center">
-                <Col>
-                    <CardDeck>
-                        {
-                            users.map((user) => (
-                                <UserCard  key={user.id} name={user.name} expenses={user.expenses} />
-                            ))
-                        }
-                    </CardDeck>
-                </Col>
-                <Col style={{ maxWidth: '9rem' }} >
-                <Button variant="info" onClick={() => switchModal(true)}>Ajouter un utilisateur</Button>     
-                </Col>
-
-            </Row>
-        </Container>
+        <main className="main">
+            <div className="main__swich">
+                <Form.Switch 
+                    type="switch"
+                    id="custom-switch"
+                    label="Check this switch" 
+                    checked={switchResultPage}
+                    onChange={clickChangeView}
+                />
+            </div>
+            {
+                !switchResultPage && <UserList />
+            }
+            {
+                switchResultPage && <ResultView />
+            }
+        </main>
 )};
 
 Main.propTypes = {
-    main: PropTypes.object.isRequired,
-    switchModal: PropTypes.func.isRequired
-
-    //TODO PropTypes.shape({
-        // users: PropTypes.arrayOf(PropTypes.shape({
-            // id: PropTypes.number.isRequired,
-            // name: PropTypes.string.isRequired,
-            // expenses: PropTypes.array.isRequired,
-        // })),
-    // }))
+    switchResultPage: PropTypes.bool.isRequired,
+    clickChangeView: PropTypes.func.isRequired,
 };
 
 

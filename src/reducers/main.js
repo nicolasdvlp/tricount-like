@@ -1,8 +1,13 @@
-import { DISPLAY_MODAL, ADD_USER, UPDATE_INPUT } from '../actions/modal';
+import { DISPLAY_MODAL, ADD_USER, UPDATE_INPUT, ADD_EXPENSE } from '../actions/card'
+import { SWITCH_VIEW } from '../actions/switchView'
 
 const initialState = {
+    switchResultPage: false,
     displayModal: false,
     inputModal: '',
+    displayModalExp: false,
+    inputModalExp: '',
+    inputModalNum: 0,
     users: [
         {
             id: 1,
@@ -93,9 +98,8 @@ const users = (state = initialState, action = {}) => {
         return {
             ...state,
             displayModal: !state.displayModal,
-    };
+        };
     case ADD_USER:
-        console.log(action)
         return {
             ...state,
             users: [...state.users, {
@@ -106,12 +110,37 @@ const users = (state = initialState, action = {}) => {
             inputModal: '',
             displayModal: false,
 
-        }
+        };
     case UPDATE_INPUT:
         return {
             ...state,
             inputModal: action.payload,
-        }
+        };
+    case ADD_EXPENSE:
+        return {
+            ...state,
+            users: state.users.map((item) => {
+                if (item.id !== action.payload) {
+                  return item
+                }
+                // Otherwise
+                return {
+                    ...item,
+                    expenses: [...item.expenses,
+                        {
+                            id: 474458,
+                            label: "npainnogain",
+                            amount: 100
+                        },
+                    ]
+                }
+            })
+        };
+    case SWITCH_VIEW:
+        return {
+            ...state,
+            switchResultPage: !state.switchResultPage
+        };
     default:
         return state;
   }
