@@ -1,13 +1,16 @@
-import { DISPLAY_MODAL, ADD_USER, UPDATE_INPUT, ADD_EXPENSE } from '../actions/card'
+import { DISPLAY_MODAL, DISPLAY_MODAL_EXP, ADD_USER, UPDATE_INPUT, ADD_EXPENSE } from '../actions/card'
 import { SWITCH_VIEW } from '../actions/switchView'
 
 const initialState = {
-    switchResultPage: false,
-    displayModal: false,
-    inputModal: '',
     displayModalExp: false,
-    inputModalExp: '',
-    inputModalNum: 0,
+    displayModal: false,
+    switchResultPage: false,
+    formInput: {
+        inputModal: "",
+        inputModalExp: "",
+        inputModalExpNum: "",
+        currentUserExpID: 0,
+    },
     users: [
         {
             id: 1,
@@ -89,7 +92,7 @@ const initialState = {
                 }
             ]
         }
-    ]
+    ],
 };
 
 const users = (state = initialState, action = {}) => {
@@ -99,28 +102,42 @@ const users = (state = initialState, action = {}) => {
             ...state,
             displayModal: !state.displayModal,
         };
+    case DISPLAY_MODAL_EXP:
+        return {
+            ...state,
+            displayModalExp: !state.displayModalExp,
+            formInput: {
+                ...state.formInput,
+                currentUserExpID: action.payload,
+            }
+        };
     case ADD_USER:
         return {
             ...state,
             users: [...state.users, {
                 id: Math.max(...state.users.map((o) => o.id)) + 1, 
-                name: state.inputModal, 
+                name: state.formInput.inputModal, 
                 expenses: []
             }],
-            inputModal: '',
+            formInput: {
+                ...state.formInput,
+                inputModal: '',
+            },
             displayModal: false,
-
         };
     case UPDATE_INPUT:
         return {
             ...state,
-            inputModal: action.payload,
+            formInput: {
+                ...state.formInput,
+                ...action.payload,
+            },
         };
     case ADD_EXPENSE:
         return {
             ...state,
             users: state.users.map((item) => {
-                if (item.id !== action.payload) {
+                if (item.id !== state.formInput.currentUserExpID) {
                   return item
                 }
                 // Otherwise
@@ -129,12 +146,19 @@ const users = (state = initialState, action = {}) => {
                     expenses: [...item.expenses,
                         {
                             id: 474458,
-                            label: "npainnogain",
-                            amount: 100
+                            label: state.formInput.inputModalExp,
+                            amount: state.formInput.inputModalExpNum
                         },
                     ]
                 }
-            })
+            }),
+            formInput: {
+                ...state.formInput,
+                inputModalExp: "",
+                inputModalExpNum: "",
+                currentUserExpID: 0,
+            },
+            displayModalExp: false,
         };
     case SWITCH_VIEW:
         return {

@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 
 // == Composant
 const ModalForm = (props) => {
-    const { clickAddUser, onChangeInput, inputModal, onHide } = props
+    const { currentUserExpID, onChangeInput, inputModal, onHide, onSubmitExp } = props
 
     const handleInputChange = (evt) => { onChangeInput({ [evt.target.name]: evt.target.value }) };
 
@@ -24,11 +24,18 @@ const ModalForm = (props) => {
                     Ajouter un(e) ami(e)
                 </Modal.Title>
             </Modal.Header>
-            <Form onSubmit={clickAddUser} >
+            <Form onSubmit={(e) => {
+                e.preventDefault();
+                onSubmitExp(currentUserExpID)
+                }} >
                 <Modal.Body>
+                    <Form.Group controlId="type">
+                        <Form.Label>cetait qoi</Form.Label>
+                        <Form.Control type="texte" placeholder="Nom" name="inputModalExp" onChange={handleInputChange} value={inputModal} />
+                    </Form.Group>
                     <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Son nom (ou son surnom):</Form.Label>
-                        <Form.Control type="texte" placeholder="Nom" name="inputModal" onChange={handleInputChange} value={inputModal}/>
+                        <Form.Label>howmuch</Form.Label>
+                        <Form.Control type="texte" placeholder="Nom" name="inputModalExpNum" onChange={handleInputChange} value={inputModal} />
                     </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
@@ -42,9 +49,10 @@ const ModalForm = (props) => {
 
 ModalForm.propTypes = {
     onHide: PropTypes.func.isRequired,
-    clickAddUser: PropTypes.func.isRequired,
+    onSubmitExp: PropTypes.func.isRequired,
     inputModal: PropTypes.string.isRequired,
     onChangeInput: PropTypes.func.isRequired,
+    currentUserExpID: PropTypes.number.isRequired,
 }
 
 // == Export

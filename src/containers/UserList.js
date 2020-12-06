@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import UserList from '../components/UserList';
 
 // Action Creators
-import { displayModal, addExp } from '../actions/card';
+import { displayModal, displayModalExp } from '../actions/card';
 
 // === State (data) ===
 const mapStateToProps = (state) => ({
@@ -18,8 +18,8 @@ return ({
   switchModal: () => {
     dispatch(displayModal());
   },
-  addExpense: (id) => {
-    dispatch(addExp(id))
+  addExpense: (userID) => {
+    dispatch(displayModalExp(userID))
   },
 });
 }

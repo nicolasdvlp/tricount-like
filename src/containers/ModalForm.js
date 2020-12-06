@@ -10,7 +10,7 @@ import { displayModal, addUser, updateInput } from '../actions/card';
 // === State (data) ===
 const mapStateToProps = (state) => ({
     show: state.main.displayModal,
-    inputModal: state.main.inputModal,
+    inputModal: state.main.formInput.inputModal,
 });
 
 // === Actions ===
