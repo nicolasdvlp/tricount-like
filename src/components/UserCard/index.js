@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 // import './style.scss';
 
 // == Composant
-const UserCard = ({ name, expenses, addExpense }) => {
+const UserCard = ({ name, expenses, addExpense, totalUser }) => {
 return (
     <Card style={{ minWidth: '9rem' }}>
         <Card.Header>
@@ -31,7 +31,7 @@ return (
                         <ListGroup.Item key={expense.id}>{expense.label} {expense.amount}</ListGroup.Item>
                 ))                
             }
-            <ListGroup.Item variant="dark">Dark</ListGroup.Item>
+            <ListGroup.Item variant="dark">Total {totalUser}</ListGroup.Item>
         </ListGroup>
     </Card>
 );
@@ -45,6 +45,7 @@ UserCard.propTypes = {
         label: PropTypes.string.isRequired,
         amount: PropTypes.number.isRequired,
     })),
+    totalUser: PropTypes.number,
 };
 
 // == Export

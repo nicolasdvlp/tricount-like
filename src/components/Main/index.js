@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 // == Import
 import './style.scss';
 import UserList from '../../containers/UserList';
-import ResultView from '../Result'
+import ResultView from '../../containers/Result'
 
 // == Composant
 const Main = ({ switchResultPage, clickChangeView }) => {

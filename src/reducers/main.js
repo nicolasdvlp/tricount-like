@@ -8,7 +8,7 @@ const initialState = {
     formInput: {
         inputModal: "",
         inputModalExp: "",
-        inputModalExpNum: "",
+        inputModalExpNum: 0,
         currentUserExpID: 0,
     },
     users: [
@@ -147,7 +147,7 @@ const users = (state = initialState, action = {}) => {
                         {
                             id: 474458,
                             label: state.formInput.inputModalExp,
-                            amount: state.formInput.inputModalExpNum
+                            amount: Math.round(parseFloat(state.formInput.inputModalExpNum)*100)/100,
                         },
                     ]
                 }
@@ -155,7 +155,7 @@ const users = (state = initialState, action = {}) => {
             formInput: {
                 ...state.formInput,
                 inputModalExp: "",
-                inputModalExpNum: "",
+                inputModalExpNum: 0,
                 currentUserExpID: 0,
             },
             displayModalExp: false,
@@ -169,5 +169,94 @@ const users = (state = initialState, action = {}) => {
         return state;
   }
 };
+
+export const getUserAndTotalInArrays =  (userList) => {
+    const users = [];
+    const totals = [];
+
+    const _userList = userList.map((user) => ({
+        id: user.id,
+        name: user.name,
+        amount: user.expenses.reduce((dollarbillyo, {amount}) => dollarbillyo + amount, 0),
+    }))
+
+    const nbUser = _userList.length;
+    let equalBalance = 0;
+  
+    for (let index = 0; index < _userList.length; index++) {
+      equalBalance = equalBalance + _userList[index].amount;
+    }
+    const ___userList = _userList.map((friend) => ({
+        ...friend,
+        balance: (equalBalance / nbUser) - friend.amount
+      }));
+
+      ___userList.forEach(user => {
+        users.push(user.name);
+        totals.push(user.balance)
+    });
+
+    console.log(users, totals)
+    return [users, totals]
+}
+
+export const getDivision = (_friends) => { 
+    
+    const friends = _friends.map((user) => ({
+        id: user.id,
+        name: user.name,
+        amount: user.expenses.reduce((dollarbillyo, {amount}) => dollarbillyo + amount, 0),
+    }))
+    
+    friends.sort((a, b) => a.amount - b.amount);
+  
+    // let transactionNumber = 0;
+    let transactions = [];
+    const nbUser = friends.length;
+    let equalBalance = 0;
+  
+    for (let index = 0; index < friends.length; index++) {
+      equalBalance = equalBalance + friends[index].amount;
+    }
+  
+    let fiendsWithBalance = friends.map((friend) => ({
+      ...friend,
+      balance: (equalBalance / nbUser) - friend.amount
+    }));
+  
+    fiendsWithBalance.forEach((friend) => {
+      if (friend.balance) {
+    
+        for (let index = fiendsWithBalance.length - 1; friend.balance; index--) {
+    
+          let currentUser = fiendsWithBalance[index];
+    
+          if (currentUser.balance) {
+            if (friend.balance > (currentUser.balance - currentUser.balance - currentUser.balance)) {
+      
+              const currentTransaction = currentUser.balance + 0;
+              friend.balance += currentTransaction;
+              currentUser.balance -= currentTransaction;
+            //   transactionNumber++;
+              transactions.push(`${friend.name} donne ${(currentTransaction-currentTransaction-currentTransaction)}€ a ${currentUser.name}`);
+      
+            } else if ((friend.balance <= (currentUser.balance - currentUser.balance - currentUser.balance))) {
+  
+              const currentTransaction = friend.balance + 0;
+              friend.balance -= currentTransaction;
+              currentUser.balance += currentTransaction;
+            //   transactionNumber++;
+              transactions.push(`${friend.name} donne ${currentTransaction}€ a ${currentUser.name}`);
+      
+            } else {
+              console.log('nothing');
+            }
+          }
+        }
+      }
+    });
+    
+    return transactions;
+}
 
 export default users;

@@ -11,18 +11,23 @@ import UserCard from '../UserCard';
 const UserList = ({ users, switchModal, addExpense }) => (
     <Container className={UserList.name.toLowerCase()}>
         <Row className="justify-content-center">
+            <Col style={{ maxWidth: '9rem' }} >
+                <Button variant="info" onClick={switchModal}>Ajouter un utilisateur</Button>     
+            </Col>            
             <Col>
                 <CardDeck>
                     {
-                        users.map((user) => (
-                            <UserCard  key={user.id} name={user.name} expenses={user.expenses} addExpense={() => {addExpense(user.id)}} />
-                        ))
+                        users.map((user) => {
+                        
+                            const totalUser = user.expenses.reduce((dollarbillyo, {amount}) => dollarbillyo + amount, 0);
+                            return (
+                                <UserCard  key={user.id} name={user.name} expenses={user.expenses} addExpense={() => {addExpense(user.id)}} totalUser={totalUser+0} />
+                            )
+                        })
                     }
                 </CardDeck>
             </Col>
-            <Col style={{ maxWidth: '9rem' }} >
-            <Button variant="info" onClick={switchModal}>Ajouter un utilisateur</Button>     
-            </Col>
+
         </Row>
     </Container>
 );

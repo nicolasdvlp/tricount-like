@@ -21,7 +21,8 @@ const friends = [{
 ((friends) => { 
   friends.sort((a, b) => a.account - b.account);
 
-  let trasaction = 0;
+  let transactionNumber = 0;
+  let transactions = [];
   const nbUser = friends.length;
   let equalBalance = 0;
 
@@ -46,19 +47,19 @@ const friends = [{
         if (currentUser.balance) {
           if (friend.balance > (currentUser.balance - currentUser.balance - currentUser.balance)) {
     
-            const transaction = currentUser.balance + 0;
-            friend.balance += transaction;
-            currentUser.balance -= transaction;
-            trasaction++;
-            console.log(friend.name, 'donne', transaction, 'a', currentUser.name);
+            const currentTransaction = currentUser.balance + 0;
+            friend.balance += currentTransaction;
+            currentUser.balance -= currentTransaction;
+            transactionNumber++;
+            transactions.push(`${friend.name} donne ${currentTransaction} a ${currentUser.name}`);
     
           } else if ((friend.balance <= (currentUser.balance - currentUser.balance - currentUser.balance))) {
 
-            const transaction = friend.balance + 0;
-            friend.balance -= transaction;
-            currentUser.balance += transaction;
-            trasaction++;
-            console.log(friend.name, 'donne', transaction, 'a', currentUser.name);
+            const currentTransaction = friend.balance + 0;
+            friend.balance -= currentTransaction;
+            currentUser.balance += currentTransaction;
+            transactionNumber++;
+            transactions.push(`${friend.name} donne ${currentTransaction} a ${currentUser.name}`);
     
           } else {
             console.log('nothing');
@@ -67,8 +68,7 @@ const friends = [{
       }
     }
   })
-  console.log(fiendsWithBalance);
-  console.log(trasaction);
+  return [transactions, transactionNumber];
 
 })(friends);
 

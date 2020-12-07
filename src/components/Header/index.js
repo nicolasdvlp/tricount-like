@@ -9,7 +9,11 @@ import './style.scss';
 const Header = () => {
 return (
     <Container fluid className={Header.name.toLowerCase()}>
-        Header
+        <div className='calculator'>
+            <div className='display'>
+                <h1 className='title'>les comptes<br/>sont bons</h1>
+            </div>
+        </div>
     </Container>
 );
 };

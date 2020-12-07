@@ -1,5 +1,7 @@
 .main {
-background-color: lightblue;
+    background-color: lightblue;
+    min-height: 100vh;
+    height: 100%;
 
     &__swich {
         text-align: center;
