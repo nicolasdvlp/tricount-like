@@ -12,7 +12,6 @@ const mapStateToProps = (state) => ({
     show: state.main.displayModalExp,
     inputModalExp: state.main.formInput.inputModalExp,
     inputModalExpNum: state.main.formInput.inputModalExpNum,
-    currentUserExpID: state.main.formInput.currentUserExpID,
 });
 
 // === Actions ===

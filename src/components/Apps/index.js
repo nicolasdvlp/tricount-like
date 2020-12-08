@@ -7,6 +7,7 @@ import Header from '../Header'
 import Main from '../../containers/Main'
 import ModalForm from '../../containers/ModalForm'
 import ModalFormExp from '../../containers/ModalFormExp'
+import ModalDelUser from '../../containers/ModalDelUser'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
 
       <ModalForm />
       <ModalFormExp />
+      <ModalDelUser />
     </div>
   );
 }

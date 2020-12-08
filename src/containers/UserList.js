@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import UserList from '../components/UserList';
 
 // Action Creators
-import { displayModal, displayModalExp } from '../actions/card';
+import { displayModal, displayModalExp, displayModalDelUser } from '../actions/card';
 
 // === State (data) ===
 const mapStateToProps = (state) => ({
@@ -20,6 +20,9 @@ return ({
   },
   addExpense: (userID) => {
     dispatch(displayModalExp(userID))
+  },
+  deleteUserModal: (userID) => {
+    dispatch(displayModalDelUser(userID))
   },
 });
 }

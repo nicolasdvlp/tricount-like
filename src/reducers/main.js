@@ -1,15 +1,17 @@
-import { DISPLAY_MODAL, DISPLAY_MODAL_EXP, ADD_USER, UPDATE_INPUT, ADD_EXPENSE } from '../actions/card'
+import { DISPLAY_MODAL, DISPLAY_MODAL_EXP, ADD_USER, UPDATE_INPUT, ADD_EXPENSE, DEL_USER, DISPLAY_MODAL_DEL_USER } from '../actions/card'
 import { SWITCH_VIEW } from '../actions/switchView'
 
 const initialState = {
     displayModalExp: false,
     displayModal: false,
+    displayModalDelUser: false,
     switchResultPage: false,
     formInput: {
         inputModal: "",
         inputModalExp: "",
         inputModalExpNum: 0,
         currentUserExpID: 0,
+        currentUserExpName: ""
     },
     users: [
         {
@@ -109,8 +111,19 @@ const users = (state = initialState, action = {}) => {
             formInput: {
                 ...state.formInput,
                 currentUserExpID: action.payload,
+                currentUserExpName: action.payload ? state.users.find((user) => (user.id === action.payload)).name : ""
             }
         };
+    case DISPLAY_MODAL_DEL_USER:
+        return {
+            ...state,
+            displayModalDelUser: !state.displayModalDelUser,
+            formInput: {
+                ...state.formInput,
+                currentUserExpID: action.payload,
+                currentUserExpName: action.payload ? state.users.find((user) => (user.id === action.payload)).name : ""
+            }
+        }
     case ADD_USER:
         return {
             ...state,
@@ -124,6 +137,12 @@ const users = (state = initialState, action = {}) => {
                 inputModal: '',
             },
             displayModal: false,
+        };
+    case DEL_USER:
+        return {
+            ...state,
+            users: state.users.filter(user => user.id !== state.formInput.currentUserExpID ),
+            displayModalDelUser: !state.displayModalDelUser,
         };
     case UPDATE_INPUT:
         return {
@@ -145,7 +164,7 @@ const users = (state = initialState, action = {}) => {
                     ...item,
                     expenses: [...item.expenses,
                         {
-                            id: 474458,
+                            id: 474458, //FIXME:
                             label: state.formInput.inputModalExp,
                             amount: Math.round(parseFloat(state.formInput.inputModalExpNum)*100)/100,
                         },

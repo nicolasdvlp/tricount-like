@@ -43,7 +43,7 @@ const ModalForm = (props) => {
                 </Modal.Footer>
             </Form>
         </Modal>
-)
+    )
 };
 
 ModalForm.propTypes = {
