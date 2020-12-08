@@ -1,6 +1,6 @@
 // == Import npm
 import React from 'react';
-import { Form  } from 'react-bootstrap';
+import { Nav  } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 // == Import
@@ -12,15 +12,17 @@ import ResultView from '../../containers/Result'
 const Main = ({ switchResultPage, clickChangeView }) => {
     return (
         <main className="main">
-            <div className="main__swich">
-                <Form.Switch 
-                    type="switch"
-                    id="custom-switch"
-                    label="Check this switch" 
-                    checked={switchResultPage}
-                    onChange={clickChangeView}
-                />
-            </div>
+            <Nav variant="pills" className="main__switch" >
+                <Nav.Item>
+                    <Nav.Link  active={!switchResultPage}
+                    onClick={clickChangeView}>Edition</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link active={switchResultPage}
+                    onClick={clickChangeView}>Résultat</Nav.Link>
+                </Nav.Item>
+            </Nav>
+
             {
                 !switchResultPage && <UserList />
             }

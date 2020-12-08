@@ -1,0 +1,41 @@
+.cardP {
+
+    background-color: inherit;
+    border: none;
+    margin-bottom: 1rem!important;
+
+    &__header {
+        background-color: #A8436E;
+        color: whitesmoke;
+        font-weight: bold;
+        font-size: larger;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__header--left  {
+       text-align: left;
+    }
+
+    &__header--right {
+        text-align: right;
+    }
+
+    &__header_icons {
+        margin-left: 0.5rem;
+        cursor: pointer;
+    }
+
+    &__body {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__footer {
+        background-color: #42D88B;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+    }
+
+}

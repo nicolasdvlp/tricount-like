@@ -1,0 +1,21 @@
+.result {
+    
+    &__container {
+        margin-bottom: 1rem;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    &__graph {
+    height: 35vh;
+    }
+
+    &__title {
+        font-size: x-large;
+    }
+
+    &__emoji {
+        font-size: 4rem;
+        text-align: center;
+    }
+}

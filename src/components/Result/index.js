@@ -2,11 +2,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Bar } from 'react-chartjs-2';
-import { Container  } from 'react-bootstrap';
+import { Container, ListGroup } from 'react-bootstrap';
 import 'chartjs-plugin-datalabels';
 
 // == Import
-// import './style.scss';
+import './style.scss';
 
 
 // == Composant
@@ -16,9 +16,9 @@ const ResultView = ({ labels, data, transactions }) => {
         labels,
         datasets: [
           {
-            label: 'My First dataset',
-            backgroundColor: 'rgba(255,99,132,0.2)',
-            borderColor: 'rgba(255,99,132,1)',
+            label: 'Répartition',
+            backgroundColor: '#42D88B',
+            borderColor: '#25774D',
             borderWidth: 1,
             hoverBackgroundColor: 'rgba(255,99,132,0.4)',
             hoverBorderColor: 'rgba(255,99,132,1)',
@@ -29,7 +29,7 @@ const ResultView = ({ labels, data, transactions }) => {
             plugins: {
                 datalabels: {
                    display: true,
-                   color: 'white'
+                   color: 'black'
                 },
                 formatter: function(value, context) {
                     return context.dataIndex + ': ' + Math.round(value*100) + '€';//FIXME:
@@ -40,29 +40,34 @@ const ResultView = ({ labels, data, transactions }) => {
 
 return (
     <Container className={ResultView.name.toLowerCase()}>
-        Les rouges doivent aux verts
-        <Bar
-          data={dataFriends}
-          width={100}
-          height={50}
-          options={{
-            maintainAspectRatio: false
-          }}
-        />
-        Comment équilibrer ?
-        {
-            transactions.map((transac) => (
-                <p key={transac}>{transac}</p>
-            ))
-        }
+        <h2 className="result__title">Les rouges doivent aux verts</h2>
+        <Container className="result__graph result__container">
+            <Bar
+            data={dataFriends}
+            width={100}
+            height={50}
+            options={{
+                maintainAspectRatio: false
+            }}
+            />
+        </Container>
+        <Container className="result__equilibre result__container">
+            <h2 className="result__title">Comment équilibrer ?</h2>
+            <ListGroup as="ul">
+                {
+                    transactions.map((transac) => <ListGroup.Item as="li" key={transac}>{transac}</ListGroup.Item>)
+                }
+            </ListGroup>
+            <div className="result__emoji">🎉</div>
+        </Container>
     </Container>
 );
 };
 
 ResultView.propTypes = {
-    labels: PropTypes.array,
-    data: PropTypes.array,
-    transactions: PropTypes.array,
+    labels: PropTypes.arrayOf(PropTypes.string).isRequired,
+    data: PropTypes.arrayOf(PropTypes.string).isRequired,
+    transactions: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 // == Export

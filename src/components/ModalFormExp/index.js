@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 // == Composant
 const ModalForm = (props) => {
     const { currentUserExpID, onChangeInput, inputModal, onHide, onSubmitExp } = props
-
     const handleInputChange = (evt) => { onChangeInput({ [evt.target.name]: evt.target.value }) };
 
     return (
@@ -35,8 +34,7 @@ const ModalForm = (props) => {
                     </Form.Group>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>howmuch</Form.Label>
-                        <Form.Control type="text" placeholder="Nom" name="inputModalExpNum" onChange={handleInputChange} value={inputModal} parse={(val) => parseInt(val, 10)}
- />
+                        <Form.Control type="text" placeholder="Nom" name="inputModalExpNum" onChange={handleInputChange} value={inputModal} parse={(val) => parseInt(val, 10)} />
                     </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>

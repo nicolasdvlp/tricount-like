@@ -1,10 +1,13 @@
 .main {
-    background-color: lightblue;
+    background: rgb(124,78,116);
+    background: linear-gradient(261deg, rgba(124,78,116,1) 0%, rgba(83,78,124,1) 100%);
     min-height: 100vh;
     height: 100%;
 
-    &__swich {
-        text-align: center;
-        padding: 2em 0;
+    &__switch {
+        padding: 1em 0;
+        display: flex;
+        justify-content: center;
+        font-weight: bold;
     }
 }
