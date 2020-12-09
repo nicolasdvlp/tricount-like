@@ -16,7 +16,7 @@ const initialState = {
     users: [
         {
             id: 1,
-            name: "alex",
+            name: "Flagada",
             expenses: [
                 {
                     id: 474,
@@ -32,7 +32,7 @@ const initialState = {
         },
         {
             id: 2,
-            name: "bruno",
+            name: "Gontran",
             expenses: [
                 {
                     id: 47758,
@@ -48,7 +48,7 @@ const initialState = {
         },
         {
             id: 3,
-            name: "julia",
+            name: "Popop",
             expenses: [
                 {
                     id: 4718,
@@ -64,7 +64,7 @@ const initialState = {
         },
         {
             id: 4,
-            name: "loic",
+            name: "Picsou",
             expenses: [
                 {
                     id: 47338,
@@ -80,7 +80,7 @@ const initialState = {
         },
         {
             id: 5,
-            name: "rene",
+            name: "Gripsou",
             expenses: [
                 {
                     id: 47968,
@@ -189,47 +189,44 @@ const users = (state = initialState, action = {}) => {
   }
 };
 
-export const getUserAndTotalInArrays =  (userList) => {
-    const users = [];
-    const totals = [];
+export const getUserTotalAndColorInArrays =  (_friends) => {
 
-    const _userList = userList.map((user) => ({
-        id: user.id,
-        name: user.name,
-        amount: user.expenses.reduce((dollarbillyo, {amount}) => dollarbillyo + amount, 0),
-    }))
+    const positiveColor = "#4ba843";
+    const negativeColor = "#a84343";
 
-    const nbUser = _userList.length;
+    const nbUser = _friends.length;
     let equalBalance = 0;
-  
-    for (let index = 0; index < _userList.length; index++) {
-      equalBalance = equalBalance + _userList[index].amount;
+
+    const friends = _friends
+        .map((user) => ({
+            id: user.id,
+            name: user.name,
+            total: user.expenses.reduce((dollarbillyo, {amount}) => dollarbillyo + amount, 0),
+        }))
+
+    for (let index = 0; index < friends.length; index++) {
+      equalBalance = equalBalance + friends[index].total;
     }
-    const ___userList = _userList.map((friend) => ({
-        ...friend,
-        balance: (equalBalance / nbUser) - friend.amount
+
+    return friends.map((friend) => ({
+        id: friend.id,
+        name: friend.name,
+        amount: (equalBalance / nbUser) - friend.total,
+        color: (equalBalance / nbUser) - friend.total >= 0 ? positiveColor : negativeColor,
       }));
-
-      ___userList.forEach(user => {
-        users.push(user.name);
-        totals.push(user.balance)
-    });
-
-    console.log(users, totals)
-    return [users, totals]
+     
 }
 
 export const getDivision = (_friends) => { 
     
-    const friends = _friends.map((user) => ({
-        id: user.id,
-        name: user.name,
-        amount: user.expenses.reduce((dollarbillyo, {amount}) => dollarbillyo + amount, 0),
-    }))
-    
-    friends.sort((a, b) => a.amount - b.amount);
+    const friends = _friends
+        .map((user) => ({
+            id: user.id,
+            name: user.name,
+            amount: user.expenses.reduce((dollarbillyo, {amount}) => dollarbillyo + amount, 0),
+        }))
+        .sort((a, b) => a.amount - b.amount);
   
-    // let transactionNumber = 0;
     let transactions = [];
     const nbUser = friends.length;
     let equalBalance = 0;

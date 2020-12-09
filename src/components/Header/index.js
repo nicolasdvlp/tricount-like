@@ -10,7 +10,7 @@ const Header = () => {
 return (
     <Container fluid className={Header.name.toLowerCase()}>
             <div className='display'>
-                <h1 className='title'>la bonne ardoise</h1>
+                <h1 className='title'>le juste compte</h1>
             </div>
     </Container>
 );

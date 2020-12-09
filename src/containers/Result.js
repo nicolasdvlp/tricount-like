@@ -3,14 +3,13 @@ import { connect } from 'react-redux';
 
 // == Import : local
 import Result from '../components/Result';
-import { getUserAndTotalInArrays, getDivision } from '../reducers/main'
+import { getUserTotalAndColorInArrays, getDivision } from '../reducers/main'
 
 // Action Creators
 
 // === State (data) ===
 const mapStateToProps = (state) => ({
-    labels: getUserAndTotalInArrays(state.main.users)[0],
-    data: getUserAndTotalInArrays(state.main.users)[1],
+    data: getUserTotalAndColorInArrays(state.main.users),
     transactions: getDivision(state.main.users),
 });
 
