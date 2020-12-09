@@ -4,10 +4,29 @@
     min-height: 100vh;
     height: 100%;
 
+    &__containerswitch {
+        padding: 1rem 0;
+    }
+
     &__switch {
-        padding: 1em 0;
         display: flex;
         justify-content: center;
         font-weight: bold;
+        width: max-content;
+        margin: auto;
+        border: 1px solid #a8436e;
+        border-radius: .25rem;
     }
+}
+
+.main .nav-link.active {
+    background-color: #a8436e;
+}
+
+.nav-link {
+    color: #42d88b;
+}
+
+.nav-link:hover {
+    color: #339b65;
 }
