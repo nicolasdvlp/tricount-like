@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 // import './style.scss';
 
 // == Composant
-const ModalForm = (props) => {
+const ModalDelUser = (props) => {
     const { currentUserExpID, onHide, onSubmitDelUser, userName } = props
 
     return (
@@ -35,12 +35,12 @@ const ModalForm = (props) => {
     )
 };
 
-ModalForm.propTypes = {
+ModalDelUser.propTypes = {
     onHide: PropTypes.func.isRequired,
     onSubmitDelUser: PropTypes.func.isRequired,
     userName: PropTypes.string.isRequired,
-    currentUserExpID: PropTypes.number.isRequired,
+    currentUserExpID: PropTypes.number,
 }
 
 // == Export
-export default ModalForm;
+export default ModalDelUser;

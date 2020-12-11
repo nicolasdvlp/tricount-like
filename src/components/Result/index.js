@@ -11,7 +11,7 @@ import Graph from '../Graph';
 // == Composant
 const ResultView = ({ data, transactions }) => (
     <Container className={ResultView.name.toLowerCase()}>
-        <h2 className="result__title">Les rouges doivent aux verts</h2>
+        <h2 className="result__title">Les rouges doivent aux jaunes</h2>
         <Container className="result__graph result__container">
            <Graph data={data} />
         </Container>

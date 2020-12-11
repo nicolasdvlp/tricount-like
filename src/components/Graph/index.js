@@ -1,13 +1,6 @@
-// install (please make sure versions match peerDependencies)
-// yarn add @nivo/core @nivo/bar// == Import npm
 import React from 'react';
 import { ResponsiveBar } from '@nivo/bar'
 import PropTypes from 'prop-types'
-// make sure parent container have a defined height when using
-// responsive component, otherwise height will be 0 and
-// no chart will be rendered.
-// website examples showcase many properties,
-// you'll often use just a few of them.
 
 const MyResponsiveBar = ({ data }) => {
     console.log('graphdata :', data);
@@ -17,7 +10,7 @@ const MyResponsiveBar = ({ data }) => {
             data={data}
             keys={[ 'amount' ]}
             indexBy="name"
-            margin={{ top: 50, right: 0, bottom: 50, left: 60 }}
+            margin={{ top: 0, right: 0, bottom: 50, left: 60 }}
             padding={0.2}
             valueScale={{ type: 'linear' }}
             indexScale={{ type: 'band', round: true }}

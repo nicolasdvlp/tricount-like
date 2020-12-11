@@ -7,7 +7,7 @@ const initialState = {
     displayModalDelUser: false,
     switchResultPage: false,
     formInput: {
-        inputModal: "",
+        inputModal: "d",
         inputModalExp: "",
         inputModalExpNum: 0,
         currentUserExpID: 0,
@@ -191,7 +191,7 @@ const users = (state = initialState, action = {}) => {
 
 export const getUserTotalAndColorInArrays =  (_friends) => {
 
-    const positiveColor = "#4ba843";
+    const positiveColor = "#a8a243";
     const negativeColor = "#a84343";
 
     const nbUser = _friends.length;
@@ -212,20 +212,20 @@ export const getUserTotalAndColorInArrays =  (_friends) => {
         id: friend.id,
         name: friend.name,
         amount: (equalBalance / nbUser) - friend.total,
-        color: (equalBalance / nbUser) - friend.total >= 0 ? positiveColor : negativeColor,
+        color: (equalBalance / nbUser) - friend.total >= 0 ? negativeColor : positiveColor,
       }));
      
 }
 
 export const getDivision = (_friends) => { 
     
-    const friends = _friends
-        .map((user) => ({
+    const friends = _friends.map((user) => ({
             id: user.id,
             name: user.name,
-            amount: user.expenses.reduce((dollarbillyo, {amount}) => dollarbillyo + amount, 0),
+            amount: user.expenses.length ? user.expenses.reduce((dollarbillyo, {amount}) => dollarbillyo + amount, 0) : 0,
         }))
-        .sort((a, b) => a.amount - b.amount);
+
+    friends.sort((a, b) => a.amount - b.amount);
   
     let transactions = [];
     const nbUser = friends.length;

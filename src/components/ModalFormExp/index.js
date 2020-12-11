@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 // import './style.scss';
 
 // == Composant
-const ModalForm = (props) => {
+const ModalFormExp = (props) => {
     const { currentUserExpID, onChangeInput, inputModal, onHide, onSubmitExp } = props
     const handleInputChange = (evt) => { onChangeInput({ [evt.target.name]: evt.target.value }) };
 
@@ -46,13 +46,13 @@ const ModalForm = (props) => {
     )
 };
 
-ModalForm.propTypes = {
+ModalFormExp.propTypes = {
     onHide: PropTypes.func.isRequired,
     onSubmitExp: PropTypes.func.isRequired,
-    inputModal: PropTypes.string.isRequired,
+    inputModal: PropTypes.string,
     onChangeInput: PropTypes.func.isRequired,
-    currentUserExpID: PropTypes.number.isRequired,
+    currentUserExpID: PropTypes.number,
 }
 
 // == Export
-export default ModalForm;
+export default ModalFormExp;
