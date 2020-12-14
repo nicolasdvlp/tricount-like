@@ -8,12 +8,12 @@ import './style.scss';
 import UserCard from '../UserCard';
 
 // == Composant
-const UserList = ({ users, switchModal, addExpense, deleteUserModal }) => (
+const UserList = ({ users, switchModal, addExpense, deleteUserModal, clickDelUsers }) => (
     <Container className={UserList.name.toLowerCase()}>
         <Row className="justify-content-center userlist--flex">
             <Col className="userlist__buttonlist">
                 <Button block className="userlist__buttonlist buttonlist--marge" variant="info" onClick={switchModal}>Ajouter un utilisateur</Button>     
-                <Button block disabled className="userlist__buttonlist buttonlist--marge" variant="warning" onClick={switchModal}>Supprimer tous les utilisateurs</Button>     
+                <Button block className="userlist__buttonlist buttonlist--marge" variant="warning" onClick={clickDelUsers}>Supprimer tous les utilisateurs</Button>     
             </Col>            
             <Col>
                 <CardDeck>

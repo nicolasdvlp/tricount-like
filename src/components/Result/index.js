@@ -14,7 +14,7 @@ const ResultView = ({ data, transactions }) => {
 
 return (
     <Container className={ResultView.name.toLowerCase()}>
-        <h2 className="result__title">Les rouges doivent aux jaunes</h2>
+        <h2 className="result__title">Les jaunes doivent aux bleus</h2>
         <Container className="result__graph result__container">
            <Graph data={data} />
         </Container>

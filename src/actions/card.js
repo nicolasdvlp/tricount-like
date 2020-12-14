@@ -4,6 +4,7 @@ export const DISPLAY_MODAL_EXP = 'DISPLAY_MODAL_EXP';
 export const DISPLAY_MODAL_DEL_USER = 'DISPLAY_MODAL_DEL_USER';
 export const ADD_USER = 'ADD_USER';
 export const DEL_USER = 'DEL_USER';
+export const DEL_USERS = 'DEL_USERS';
 export const UPDATE_INPUT = 'UPDATE_INPUT';
 
 export const displayModal = () => ({
@@ -38,4 +39,8 @@ export const addExp = (payload) => ({
 export const delUser = (payload) => ({
   type: DEL_USER,
   payload
+})
+
+export const delUsers = () => ({
+  type: DEL_USERS,
 })

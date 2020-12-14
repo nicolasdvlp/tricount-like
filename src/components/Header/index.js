@@ -8,7 +8,7 @@ import './style.scss';
 // == Composant
 const Header = () => {
 return (
-    <Container fluid className={Header.name.toLowerCase()}>
+    <Container fluid className="header">
             <div className='display'>
                 <h1 className='title'>le juste compte</h1>
             </div>

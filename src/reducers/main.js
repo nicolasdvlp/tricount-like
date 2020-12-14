@@ -1,4 +1,4 @@
-import { DISPLAY_MODAL, DISPLAY_MODAL_EXP, ADD_USER, UPDATE_INPUT, ADD_EXPENSE, DEL_USER, DISPLAY_MODAL_DEL_USER } from '../actions/card'
+import { DISPLAY_MODAL, DISPLAY_MODAL_EXP, ADD_USER, UPDATE_INPUT, ADD_EXPENSE, DEL_USER, DISPLAY_MODAL_DEL_USER, DEL_USERS } from '../actions/card'
 import { SWITCH_VIEW } from '../actions/switchView'
 
 const initialState = {
@@ -20,12 +20,12 @@ const initialState = {
             expenses: [
                 {
                     id: 474,
-                    label: "pain",
+                    label: "fajitas",
                     amount: 200
                 },
                 {
                     id: 45478,
-                    label: "couche",
+                    label: "burritos",
                     amount: 200
                 }
             ]
@@ -36,12 +36,12 @@ const initialState = {
             expenses: [
                 {
                     id: 47758,
-                    label: "pain",
+                    label: "tacos",
                     amount: 100
                 },
                 {
                     id: 433278,
-                    label: "couche",
+                    label: "chili",
                     amount: 100
                 }
             ]
@@ -52,12 +52,12 @@ const initialState = {
             expenses: [
                 {
                     id: 4718,
-                    label: "pain",
+                    label: "empanadas",
                     amount: 50
                 },
                 {
                     id: 47578,
-                    label: "couche",
+                    label: "tortillas",
                     amount: 50
                 }
             ]
@@ -68,12 +68,12 @@ const initialState = {
             expenses: [
                 {
                     id: 47338,
-                    label: "pain",
+                    label: "quesadillas",
                     amount: 300
                 },
                 {
                     id: 44878,
-                    label: "couche",
+                    label: "enchiladas",
                     amount: 300
                 }
             ]
@@ -84,12 +84,12 @@ const initialState = {
             expenses: [
                 {
                     id: 47968,
-                    label: "pain",
+                    label: "guacamole",
                     amount: 50
                 },
                 {
                     id: 4378,
-                    label: "couche",
+                    label: "tamales",
                     amount: 50
                 }
             ]
@@ -128,7 +128,7 @@ const users = (state = initialState, action = {}) => {
         return {
             ...state,
             users: [...state.users, {
-                id: Math.max(...state.users.map((o) => o.id)) + 1, 
+                id: Math.max(...state.users.map((o) => o.id)) + 1 || 0, 
                 name: state.formInput.inputModal, 
                 expenses: []
             }],
@@ -144,6 +144,11 @@ const users = (state = initialState, action = {}) => {
             users: state.users.filter(user => user.id !== state.formInput.currentUserExpID ),
             displayModalDelUser: !state.displayModalDelUser,
         };
+    case DEL_USERS:
+        return {
+            ...state,
+            users: [],
+        }
     case UPDATE_INPUT:
         return {
             ...state,
@@ -330,8 +335,8 @@ export const getDivision = (_friends) => {
 
 export const getUserTotalAndColorInArrays =  (_friends) => {
 
-    const positiveColor = "#a8a243";
-    const negativeColor = "#a84343";
+    const positiveColor = "#cf992d";
+    const negativeColor = "#17a2b8";
     let equalBalance = 0;
 
     const friends = _friends
