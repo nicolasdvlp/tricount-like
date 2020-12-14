@@ -38,7 +38,8 @@ UserList.propTypes = {
     })),
     switchModal: PropTypes.func.isRequired,
     addExpense: PropTypes.func.isRequired,
-    deleteUserModal : PropTypes.func.isRequired,
+    deleteUserModal: PropTypes.func.isRequired,
+    clickDelUsers: PropTypes.func.isRequired,
 };
 
 
