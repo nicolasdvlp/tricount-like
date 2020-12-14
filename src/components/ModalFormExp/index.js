@@ -29,11 +29,11 @@ const ModalFormExp = (props) => {
                 }} >
                 <Modal.Body>
                     <Form.Group controlId="type">
-                        <Form.Label>cetait qoi</Form.Label>
+                        <Form.Label>Libellé de la dépense</Form.Label>
                         <Form.Control type="text" placeholder="Nom" name="inputModalExp" onChange={handleInputChange} value={inputModal} />
                     </Form.Group>
                     <Form.Group controlId="formBasicEmail">
-                        <Form.Label>howmuch</Form.Label>
+                        <Form.Label>Combien ?</Form.Label>
                         <Form.Control type="text" placeholder="Nom" name="inputModalExpNum" onChange={handleInputChange} value={inputModal} parse={(val) => parseInt(val, 10)} />
                     </Form.Group>
                 </Modal.Body>

@@ -7,7 +7,7 @@ const initialState = {
     displayModalDelUser: false,
     switchResultPage: false,
     formInput: {
-        inputModal: "d",
+        inputModal: "",
         inputModalExp: "",
         inputModalExpNum: 0,
         currentUserExpID: 0,
@@ -189,32 +189,91 @@ const users = (state = initialState, action = {}) => {
   }
 };
 
-export const getUserTotalAndColorInArrays =  (_friends) => {
-
-    const positiveColor = "#a8a243";
-    const negativeColor = "#a84343";
-
-    const nbUser = _friends.length;
-    let equalBalance = 0;
-
-    const friends = _friends
-        .map((user) => ({
-            id: user.id,
-            name: user.name,
-            total: user.expenses.reduce((dollarbillyo, {amount}) => dollarbillyo + amount, 0),
-        }))
-
-    for (let index = 0; index < friends.length; index++) {
-      equalBalance = equalBalance + friends[index].total;
+Array.prototype.sum = function (prop) {
+    let total = 0
+    for ( let i = 0, _len = this.length; i < _len; i++ ) {
+        total = parseInt((total+this[i][prop])*100)/100
     }
+    return total
+}
 
-    return friends.map((friend) => ({
-        id: friend.id,
-        name: friend.name,
-        amount: (equalBalance / nbUser) - friend.total,
-        color: (equalBalance / nbUser) - friend.total >= 0 ? negativeColor : positiveColor,
-      }));
-     
+const roundFloorSign = (number) => (Math.sign(number) >= 1 ? Math.floor(number*100)/100 : Math.ceil(number*100)/100);
+const roundCeilSign = (number) => (Math.sign(number) >= 1 ? Math.ceil(number*100)/100 : Math.floor(number*100)/100);
+const roundRound = (number) => (Math.round(number*100)/100);
+
+const roundArrayCorrectly = (array) => {
+
+    const arrayWithFloatProblemWithIndex = array
+        .map((o, i) => ({...o, index:i}))
+
+    // We separate "good float numbers" (15.50) and "bad float numbes" (26.66666666...)
+    let goodFloatNumbersArray = arrayWithFloatProblemWithIndex.filter(o => !((o.balance*100)%1))
+    let badFloatNumbersArray = arrayWithFloatProblemWithIndex.filter(o => (o.balance*100)%1)
+
+    // We separate bad float in two arrays
+    let badFloatNumbersRoundedAlterArray = [];
+
+    // -- methode math floor 
+        badFloatNumbersRoundedAlterArray = [];
+        for (let index = 0; index < badFloatNumbersArray.length; index++) {
+            badFloatNumbersRoundedAlterArray.push({...badFloatNumbersArray[index], balance:roundFloorSign(badFloatNumbersArray[index].balance)})
+        }
+        if(!badFloatNumbersRoundedAlterArray.sum('balance')) {
+            return [
+                ...badFloatNumbersRoundedAlterArray, 
+                ...goodFloatNumbersArray
+            ]
+                .sort((a, b) => a.index - b.index) ;
+        }
+
+    // -- methode math ceil 
+        badFloatNumbersRoundedAlterArray = [];
+        for (let index = 0; index < badFloatNumbersArray.length; index++) {
+            badFloatNumbersRoundedAlterArray.push({...badFloatNumbersArray[index], balance:roundCeilSign(badFloatNumbersArray[index].balance)})
+        }
+
+        if(!badFloatNumbersRoundedAlterArray.sum('balance')) {
+            return [
+                ...badFloatNumbersRoundedAlterArray, 
+                ...goodFloatNumbersArray
+            ]
+                .sort((a, b) => a.index - b.index) ;
+        }
+
+    // -- methode math round 
+        badFloatNumbersRoundedAlterArray = [];
+        for (let index = 0; index < badFloatNumbersArray.length; index++) {
+            badFloatNumbersRoundedAlterArray.push({...badFloatNumbersArray[index], balance:roundRound(badFloatNumbersArray[index].balance)})
+        }
+        if(!badFloatNumbersRoundedAlterArray.sum('balance')) {
+            return [
+                ...badFloatNumbersRoundedAlterArray, 
+                ...goodFloatNumbersArray
+            ]
+                .sort((a, b) => a.index - b.index) ;
+        }
+
+    // -- methode parsemiddle array
+        for (let index = 0; index < badFloatNumbersArray.length; index++) {
+            if(!(index%2)) {
+                if(Math.sign(badFloatNumbersArray[index].balance) === 1) {
+                    badFloatNumbersRoundedAlterArray.push({...badFloatNumbersArray[index], balance:Math.ceil(badFloatNumbersArray[index].balance*100)/100})
+                } else {
+                    badFloatNumbersRoundedAlterArray.push({...badFloatNumbersArray[index], balance:Math.floor(badFloatNumbersArray[index].balance*100)/100})
+                }
+            } else {
+                if(Math.sign(badFloatNumbersArray[index].balance) === -1) {
+                    badFloatNumbersRoundedAlterArray.push({...badFloatNumbersArray[index], balance:Math.ceil(badFloatNumbersArray[index].balance*100)/100})
+                } else {
+                    badFloatNumbersRoundedAlterArray.push({...badFloatNumbersArray[index], balance:Math.floor(badFloatNumbersArray[index].balance*100)/100})
+                }
+            }
+        }
+        return [
+            ...badFloatNumbersRoundedAlterArray, 
+            ...goodFloatNumbersArray
+        ]
+            .sort((a, b) => a.index - b.index) ;
 }
 
 export const getDivision = (_friends) => { 
@@ -230,49 +289,68 @@ export const getDivision = (_friends) => {
     let transactions = [];
     const nbUser = friends.length;
     let equalBalance = 0;
-  
+    
     for (let index = 0; index < friends.length; index++) {
-      equalBalance = equalBalance + friends[index].amount;
+        equalBalance = equalBalance + friends[index].amount;
     }
-  
-    let fiendsWithBalance = friends.map((friend) => ({
-      ...friend,
-      balance: (equalBalance / nbUser) - friend.amount
+    
+    let _fiendsWithBalance = friends.map((friend) => ({
+        ...friend,
+        balance: (equalBalance / nbUser) - friend.amount
     }));
-  
+    
+    const fiendsWithBalance = roundArrayCorrectly(_fiendsWithBalance);
+ 
     fiendsWithBalance.forEach((friend) => {
-      if (friend.balance) {
-    
-        for (let index = fiendsWithBalance.length - 1; friend.balance; index--) {
-    
-          let currentUser = fiendsWithBalance[index];
-    
-          if (currentUser.balance) {
-            if (friend.balance > (currentUser.balance - currentUser.balance - currentUser.balance)) {
-      
-              const currentTransaction = currentUser.balance + 0;
-              friend.balance += currentTransaction;
-              currentUser.balance -= currentTransaction;
-            //   transactionNumber++;
-              transactions.push(`${friend.name} donne ${(currentTransaction-currentTransaction-currentTransaction)}€ a ${currentUser.name}`);
-      
-            } else if ((friend.balance <= (currentUser.balance - currentUser.balance - currentUser.balance))) {
-  
-              const currentTransaction = friend.balance + 0;
-              friend.balance -= currentTransaction;
-              currentUser.balance += currentTransaction;
-            //   transactionNumber++;
-              transactions.push(`${friend.name} donne ${currentTransaction}€ a ${currentUser.name}`);
-      
-            } else {
-              console.log('nothing');
+        for (let index = fiendsWithBalance.length - 1; index>0; index--) {
+            if (friend.balance) {
+                let currentUser = fiendsWithBalance[index];
+                if (currentUser.balance) {
+
+                    if (friend.balance > Math.abs(currentUser.balance)) {
+                        const currentTransaction = roundRound(currentUser.balance);
+                        friend.balance = roundRound(friend.balance+currentTransaction);
+                        currentUser.balance = roundRound(currentUser.balance-currentTransaction);
+                        transactions.push(`${friend.name} donne ${(currentTransaction-currentTransaction-currentTransaction)}€ a ${currentUser.name}`);
+                    }  
+                    
+                    if (friend.balance <= Math.abs(currentUser.balance)) {
+                        const currentTransaction = roundRound(friend.balance);
+                        friend.balance = roundRound(friend.balance-currentTransaction);
+                        currentUser.balance = roundRound(currentUser.balance+currentTransaction);
+                        transactions.push(`${friend.name} donne ${currentTransaction}€ a ${currentUser.name}`);
+                    } 
+                }
             }
-          }
         }
-      }
     });
-    
+
     return transactions;
+}
+
+export const getUserTotalAndColorInArrays =  (_friends) => {
+
+    const positiveColor = "#a8a243";
+    const negativeColor = "#a84343";
+    let equalBalance = 0;
+
+    const friends = _friends
+        .map((user) => ({
+            id: user.id,
+            name: user.name,
+            total: user.expenses.reduce((dollarbillyo, {amount}) => dollarbillyo + amount, 0),
+        }))
+
+    for (let i = 0; i < friends.length; i++) {
+      equalBalance = equalBalance + friends[i].total;
+    }
+
+    return roundArrayCorrectly(friends).map((friend) => ({
+        id: friend.id,
+        name: friend.name,
+        amount: roundRound((equalBalance / friends.length) - friend.total),
+        color: (equalBalance / friends.length) - friend.total >= 0 ? negativeColor : positiveColor,
+    }));
 }
 
 export default users;

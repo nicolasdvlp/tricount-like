@@ -9,7 +9,10 @@ import './style.scss';
 import Graph from '../Graph';
 
 // == Composant
-const ResultView = ({ data, transactions }) => (
+const ResultView = ({ data, transactions }) => {
+    console.log('transactions', transactions)
+
+return (
     <Container className={ResultView.name.toLowerCase()}>
         <h2 className="result__title">Les rouges doivent aux jaunes</h2>
         <Container className="result__graph result__container">
@@ -25,7 +28,7 @@ const ResultView = ({ data, transactions }) => (
             <div className="result__emoji">🎉</div>
         </Container>
     </Container>
-);
+);}
 
 ResultView.propTypes = {
     data: PropTypes.arrayOf(PropTypes.shape({
