@@ -51,7 +51,7 @@ ModalFormExp.propTypes = {
     onSubmitExp: PropTypes.func.isRequired,
     inputModal: PropTypes.string,
     onChangeInput: PropTypes.func.isRequired,
-    currentUserExpID: PropTypes.number,
+    currentUserExpID: PropTypes.string,
 }
 
 // == Export

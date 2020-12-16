@@ -1,5 +1,7 @@
 import { DISPLAY_MODAL, DISPLAY_MODAL_EXP, ADD_USER, UPDATE_INPUT, ADD_EXPENSE, DEL_USER, DISPLAY_MODAL_DEL_USER, DEL_USERS } from '../actions/card'
 import { SWITCH_VIEW } from '../actions/switchView'
+import { v4 as uuidv4 } from 'uuid';
+
 
 const initialState = {
     displayModalExp: false,
@@ -15,80 +17,80 @@ const initialState = {
     },
     users: [
         {
-            id: 1,
+            id: "1",
             name: "Flagada",
             expenses: [
                 {
-                    id: 474,
+                    id: "474",
                     label: "fajitas",
                     amount: 200
                 },
                 {
-                    id: 45478,
+                    id: "45478",
                     label: "burritos",
                     amount: 200
                 }
             ]
         },
         {
-            id: 2,
+            id: "2",
             name: "Gontran",
             expenses: [
                 {
-                    id: 47758,
+                    id: "47758",
                     label: "tacos",
                     amount: 100
                 },
                 {
-                    id: 433278,
+                    id: "433278",
                     label: "chili",
                     amount: 100
                 }
             ]
         },
         {
-            id: 3,
+            id: "3",
             name: "Popop",
             expenses: [
                 {
-                    id: 4718,
+                    id: "4718",
                     label: "empanadas",
                     amount: 50
                 },
                 {
-                    id: 47578,
+                    id: "47578",
                     label: "tortillas",
                     amount: 50
                 }
             ]
         },
         {
-            id: 4,
+            id: "4",
             name: "Picsou",
             expenses: [
                 {
-                    id: 47338,
+                    id: "47338",
                     label: "quesadillas",
                     amount: 300
                 },
                 {
-                    id: 44878,
+                    id: "44878",
                     label: "enchiladas",
                     amount: 300
                 }
             ]
         },
         {
-            id: 5,
+            id: "5",
             name: "Gripsou",
             expenses: [
                 {
-                    id: 47968,
+                    id: "47968",
                     label: "guacamole",
                     amount: 50
                 },
                 {
-                    id: 4378,
+                    id: "4378",
                     label: "tamales",
                     amount: 50
                 }
@@ -128,7 +130,7 @@ const users = (state = initialState, action = {}) => {
         return {
             ...state,
             users: [...state.users, {
-                id: Math.max(...state.users.map((o) => o.id)) + 1 || 0, 
+                id: uuidv4(), 
                 name: state.formInput.inputModal, 
                 expenses: []
             }],

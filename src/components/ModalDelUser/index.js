@@ -39,7 +39,7 @@ ModalDelUser.propTypes = {
     onHide: PropTypes.func.isRequired,
     onSubmitDelUser: PropTypes.func.isRequired,
     userName: PropTypes.string.isRequired,
-    currentUserExpID: PropTypes.number,
+    currentUserExpID: PropTypes.string,
 }
 
 // == Export

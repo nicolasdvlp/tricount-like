@@ -59,7 +59,7 @@ UserCard.propTypes = {
     name: PropTypes.string.isRequired,
     addExpense: PropTypes.func.isRequired,
     expenses : PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.number.isRequired,
+        id: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired,
         amount: PropTypes.number.isRequired,
     })),
