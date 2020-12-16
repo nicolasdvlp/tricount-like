@@ -9,11 +9,11 @@ import './style.scss';
 import Graph from '../Graph';
 
 // == Composant
-const ResultView = ({ data, transactions }) => {
+const Result = ({ data, transactions }) => {
     console.log('transactions', transactions)
 
 return (
-    <Container className={ResultView.name.toLowerCase()}>
+    <Container className={Result.name.toLowerCase()}>
         <h2 className="result__title">Les bleus doivent aux jaunes</h2>
         <Container className="result__graph result__container">
            <Graph data={data} />
@@ -30,7 +30,7 @@ return (
     </Container>
 );}
 
-ResultView.propTypes = {
+Result.propTypes = {
     data: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
@@ -41,4 +41,4 @@ ResultView.propTypes = {
 };
 
 // == Export
-export default ResultView;
+export default Result;
