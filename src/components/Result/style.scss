@@ -7,15 +7,25 @@
     }
 
     &__graph {
-    height: 35vh;
+        height: 80vw;
+        max-height: 50vh;
     }
 
     &__title {
         font-size: x-large;
+        text-align: center;
+        text-shadow: 17px 9px 20px rgba(68,68,68,0.49);
     }
 
     &__emoji {
         font-size: 4rem;
         text-align: center;
+    }
+}
+
+@media (min-width: 800px) { 
+    .list-group {
+        max-width: 720px!important;
+        margin: auto;
     }
 }
