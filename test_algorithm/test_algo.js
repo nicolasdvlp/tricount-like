@@ -1,80 +1,113 @@
-const friends = [{
-    name: "alex",
-    account: 200
+const initialState = {
+  displayModalExp: false,
+  displayModal: false,
+  displayModalDelUser: false,
+  switchResultPage: false,
+  formInput: {
+    inputModal: "d",
+    inputModalExp: "",
+    inputModalExpNum: 0,
+    currentUserExpID: 0,
+    currentUserExpName: ""
   },
-  {
-    name: "bruno",
-    account: 100
-  },
-  {
-    name: "julia",
-    account: 50
-  },
-  { name: "loic",
-    account: 300 },
-  {
-    name: "rene",
-    account: 50
-  }
-];
-
-((friends) => { 
-  friends.sort((a, b) => a.account - b.account);
-
-  let transactionNumber = 0;
-  let transactions = [];
-  const nbUser = friends.length;
-  let equalBalance = 0;
-
-  for (let index = 0; index < friends.length; index++) {
-    equalBalance = equalBalance + friends[index].account;
-  }
-
-  let fiendsWithBalance = friends.map((friend) => ({
-    ...friend,
-    balance: (equalBalance / nbUser) - friend.account
-  }));
-
-  console.log(fiendsWithBalance);
-
-  fiendsWithBalance.forEach((friend) => {
-    if (friend.balance) {
-  
-      for (let index = fiendsWithBalance.length - 1; friend.balance; index--) {
-  
-        let currentUser = fiendsWithBalance[index];
-  
-        if (currentUser.balance) {
-          if (friend.balance > (currentUser.balance - currentUser.balance - currentUser.balance)) {
-    
-            const currentTransaction = currentUser.balance + 0;
-            friend.balance += currentTransaction;
-            currentUser.balance -= currentTransaction;
-            transactionNumber++;
-            transactions.push(`${friend.name} donne ${currentTransaction} a ${currentUser.name}`);
-    
-          } else if ((friend.balance <= (currentUser.balance - currentUser.balance - currentUser.balance))) {
-
-            const currentTransaction = friend.balance + 0;
-            friend.balance -= currentTransaction;
-            currentUser.balance += currentTransaction;
-            transactionNumber++;
-            transactions.push(`${friend.name} donne ${currentTransaction} a ${currentUser.name}`);
-    
-          } else {
-            console.log('nothing');
-          }
+  users: [
+    {
+      id: 2,
+      name: "Gontran",
+      expenses: [
+        {
+          id: 433278,
+          label: "couche",
+          amount: 100000
         }
-      }
+      ]
+    },
+    {
+      id: 3,
+      name: "Popop",
+      expenses: [
+        {
+          id: 47578,
+          label: "couche",
+          amount: 50
+        }
+      ]
+    },
+    {
+      id: 4,
+      name: "Picsou",
+      expenses: [
+        {
+          id: 47338,
+          label: "pain",
+          amount: 50
+        }
+      ]
     }
-  })
-  return [transactions, transactionNumber];
+  ],
+};
 
-})(friends);
+function precise_round(num, decimals) {
+  var t = Math.pow(10, decimals);
+  return +(Math.round((num * t) + (decimals > 0 ? 1 : 0) * (Math.sign(num) * (10 / Math.pow(100, decimals)))) / t).toFixed(decimals);
+}
+
+function testIt(x, y, transactionArray) {
+  if (Math.abs(x.balance) > Math.abs(y.balance)) {
+    // console.log('🍟🍟🍟')
+    const currentTransaction = y.balance; // -32.2
+    // console.log('🍟   ' + currentTransaction)
+    x.balance = precise_round((x.balance + currentTransaction), 2);
+    y.balance = precise_round((y.balance - currentTransaction), 2);
+    transactionArray.push(`${x.name} donne ${(currentTransaction)}€ a ${y.name}`);
+    // console.log(`${x.name} donne ${(currentTransaction)}€ a ${y.name} et il lui reste ${x.balance}`);
+  }
+  if (Math.abs(x.balance) <= Math.abs(y.balance)) {
+    // console.log('🍕🍕🍕')
+    const currentTransaction = x.balance;  // -30.8
+    // console.log('🍕   ' + currentTransaction)
+    x.balance = precise_round((x.balance - currentTransaction), 2);
+    y.balance = precise_round((y.balance + currentTransaction), 2);
+    transactionArray.push(`${x.name} donne ${currentTransaction}€ a ${y.name}`);
+    // console.log(`${x.name} donne ${currentTransaction}€ a ${y.name} et il lui reste ${x.balance}`);
+  }
+}
+
+const getDivision = (friends) => {
+
+  let transactions = [],
+    equalBalance = 0;
+  const nbUser = friends.length;
 
 
+  friends = friends
+    .map((user) => {
+      let amount = user.expenses.length ? user.expenses.reduce((dollarbillyo, { amount }) => dollarbillyo - amount, 0) : 0
+      equalBalance += amount
 
+      return { id: user.id, name: user.name, amount }
+    })
+    .sort((a, b) => b.amount - a.amount)
+    .map((friend) => ({
+      ...friend,
+      balance: precise_round(- friend.amount + (equalBalance / nbUser), 2)
+    }));
 
+  console.log(friends)
+  friends.forEach((friend) => {
 
+    for (let index = friends.length - 1; index >= 0; index--) {
+      let currentUser = friends[index];
 
-// for each friend
+      if (!friend.balance) break
+      if (friend.id === currentUser.id || !currentUser.balance) continue;
+
+      testIt(friend, currentUser, transactions)
+    }
+  });
+  console.log(friends)
+  return transactions;
+}
+console.log('🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪')
+const result = getDivision(initialState.users)
+console.log('🔥' + result)
