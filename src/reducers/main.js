@@ -18,7 +18,7 @@ const initialState = {
   users: [
     {
       id: "1",
-      name: "Flagada",
+      name: "Archibald",
       expenses: [
         {
           id: "474",
@@ -34,7 +34,7 @@ const initialState = {
     },
     {
       id: "2",
-      name: "Gontran",
+      name: "Théodule",
       expenses: [
         {
           id: "47758",
@@ -50,7 +50,7 @@ const initialState = {
     },
     {
       id: "3",
-      name: "Popop",
+      name: "Eugène",
       expenses: [
         {
           id: "4718",
@@ -66,7 +66,7 @@ const initialState = {
     },
     {
       id: "4",
-      name: "Picsou",
+      name: "Stanislas",
       expenses: [
         {
           id: "47338",
@@ -82,7 +82,7 @@ const initialState = {
     },
     {
       id: "5",
-      name: "Gripsou",
+      name: "Hippolyte",
       expenses: [
         {
           id: "47968",
