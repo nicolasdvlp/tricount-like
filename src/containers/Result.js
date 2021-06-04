@@ -9,7 +9,7 @@ import { getUserTotalAndColorInArrays, getDivision } from '../reducers/main'
 
 // === State (data) ===
 const mapStateToProps = (state) => ({
-  data: getUserTotalAndColorIArrays(state.main.users),
+  data: getUserTotalAndColorInArrays(state.main.users),
   transactions: getDivision(state.main.users),
 });
 

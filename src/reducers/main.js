@@ -189,7 +189,7 @@ const users = (state = initialState, action = {}) => {
     case SWITCH_VIEW:
       return {
         ...state,
-        switchResultPage: !state.switchResultPage
+        switchResultPage: action.payload || !state.switchResultPage
       };
     default:
       return state;
@@ -254,7 +254,6 @@ export const getDivision = (friends) => {
       doTransaction(friend, currentUser, transactions)
     }
   })
-
   return transactions;
 }
 
@@ -266,10 +265,11 @@ export const getUserTotalAndColorInArrays = (friends) => {
 
   friends = friends
     .map((user) => {
-      let total = user.expenses.length ? user.expenses.reduce((dollarbillyo, { amount }) => dollarbillyo - amount, 0) : 0
-      equalBalance += total
-
-      return { id: user.id, name: user.name, total }
+      let total = user.expenses.length
+        ? user.expenses.reduce((dollarbillyo, { amount }) => dollarbillyo - amount, 0)
+        : 0;
+      equalBalance += total;
+      return { id: user.id, name: user.name, total };
     })
 
   return friends.map((friend) => ({

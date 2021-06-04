@@ -14,8 +14,11 @@ const mapStateToProps = (state) => ({
 
 // === Actions ===
 const mapDispatchToProps = (dispatch) => ({
-  clickChangeView: () => {
-    dispatch(swtchView());
+  clickChangeView: (payload) => {
+    if (typeof (payload) === 'boolean')
+      dispatch(swtchView(payload));
+    else
+      dispatch(swtchView());
   }
 });
 

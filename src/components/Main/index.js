@@ -10,32 +10,40 @@ import ResultView from '../../containers/Result'
 
 // == Composant
 const Main = ({ switchResultPage, clickChangeView }) => {
-    return (
-        <main className="main">
-            <Container className="justify-content-md-center main__containerswitch">
-                <Nav variant="pills" className="main__switch" >
-                    <Nav.Item>
-                        <Nav.Link  active={!switchResultPage}
-                        onClick={clickChangeView}>Edition</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link active={switchResultPage}
-                        onClick={clickChangeView}>Résultat</Nav.Link>
-                    </Nav.Item>
-                </Nav>
-            </Container>
-            {
-                !switchResultPage && <UserList />
-            }
-            {
-                switchResultPage && <ResultView />
-            }
-        </main>
-)};
+  React.useEffect(() => {
+    window.addEventListener('keydown', (event) => {
+      if (event.key === "ArrowRight") clickChangeView(true)
+      if (event.key === "ArrowLeft") clickChangeView(false)
+    });
+  }, []);
+
+  return (
+    <main className="main">
+      <Container className="justify-content-md-center main__containerswitch">
+        <Nav variant="pills" className="main__switch" >
+          <Nav.Item>
+            <Nav.Link active={!switchResultPage}
+              onClick={clickChangeView}>Edition</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link active={switchResultPage}
+              onClick={clickChangeView}>Résultat</Nav.Link>
+          </Nav.Item>
+        </Nav>
+      </Container>
+      {
+        !switchResultPage && <UserList />
+      }
+      {
+        switchResultPage && <ResultView />
+      }
+    </main>
+  )
+};
 
 Main.propTypes = {
-    switchResultPage: PropTypes.bool.isRequired,
-    clickChangeView: PropTypes.func.isRequired,
+  switchResultPage: PropTypes.bool.isRequired,
+  clickChangeView: PropTypes.func.isRequired,
 };
 
 
