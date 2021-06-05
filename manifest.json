@@ -59,7 +59,7 @@
       "purpose": "maskable"
     }
   ],
-  "start_url": "https://lejustecompte.nicolasmateos.dev/",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#ffffff",
   "background_color": "#784e75"

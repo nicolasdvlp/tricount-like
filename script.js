@@ -45,7 +45,6 @@ if ("serviceWorker" in navigator) {
       );
     })
     .catch(err => {
-      // Il y a eu un problème
       console.error(
         "App: Crash de Service Worker",
         err
