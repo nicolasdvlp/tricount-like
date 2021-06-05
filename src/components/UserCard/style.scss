@@ -1,41 +1,39 @@
 .cardP {
+  background-color: inherit;
+  border: none;
+  margin-bottom: 1rem !important;
 
-    background-color: inherit;
-    border: none;
-    margin-bottom: 1rem!important;
+  &__header {
+    background-color: #a8436e;
+    color: whitesmoke;
+    font-weight: bold;
+    font-size: larger;
+    display: flex;
+    justify-content: space-between;
+  }
 
-    &__header {
-        background-color: #A8436E;
-        color: whitesmoke;
-        font-weight: bold;
-        font-size: larger;
-        display: flex;
-        justify-content: space-between;
-    }
+  &__header--left {
+    text-align: left;
+  }
 
-    &__header--left  {
-       text-align: left;
-    }
+  &__header--right {
+    text-align: right;
+  }
 
-    &__header--right {
-        text-align: right;
-    }
+  &__header_icons {
+    margin-left: 0.5rem;
+    cursor: pointer;
+  }
 
-    &__header_icons {
-        margin-left: 0.5rem;
-        cursor: pointer;
-    }
+  &__body {
+    display: flex;
+    justify-content: space-between;
+  }
 
-    &__body {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    &__footer {
-        background-color: #42D88B;
-        font-weight: bold;
-        display: flex;
-        justify-content: space-between;
-    }
-
+  &__footer {
+    background-color: #42d88b;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+  }
 }
