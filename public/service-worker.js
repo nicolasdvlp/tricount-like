@@ -46,3 +46,7 @@ self.addEventListener("activate", event => {
     })
   );
 });
+
+self.addEventListener('fetch', (e) => {
+  console.log('[Service Worker] Ressource récupérée ' + e);
+});

@@ -1,6 +1,8 @@
 {
-  "short_name": "le juste compte",
+  "short_name": "juste compte",
   "name": "le juste compte - tricount like app",
+  "description": "le juste compte - tricount like app - Nicolas MATEOS",
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "favicon.ico",
