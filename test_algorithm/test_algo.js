@@ -49,27 +49,27 @@ const initialState = {
 
 function precise_round(num, decimals) {
   var t = Math.pow(10, decimals);
-  return +(Math.round((num * t) + (decimals > 0 ? 1 : 0) * (Math.sign(num) * (10 / Math.pow(100, decimals)))) / t).toFixed(decimals);
+  return +(
+    Math.round(
+      (num * t)
+      + (decimals > 0 ? 1 : 0)
+      * (Math.sign(num) * (10 / Math.pow(100, decimals)))
+    ) / t)
+    .toFixed(decimals);
 }
 
 function testIt(x, y, transactionArray) {
   if (Math.abs(x.balance) > Math.abs(y.balance)) {
-    // console.log('🍟🍟🍟')
-    const currentTransaction = y.balance; // -32.2
-    // console.log('🍟   ' + currentTransaction)
+    const currentTransaction = y.balance;
     x.balance = precise_round((x.balance + currentTransaction), 2);
     y.balance = precise_round((y.balance - currentTransaction), 2);
     transactionArray.push(`${x.name} donne ${(currentTransaction)}€ a ${y.name}`);
-    // console.log(`${x.name} donne ${(currentTransaction)}€ a ${y.name} et il lui reste ${x.balance}`);
   }
   if (Math.abs(x.balance) <= Math.abs(y.balance)) {
-    // console.log('🍕🍕🍕')
-    const currentTransaction = x.balance;  // -30.8
-    // console.log('🍕   ' + currentTransaction)
+    const currentTransaction = x.balance;
     x.balance = precise_round((x.balance - currentTransaction), 2);
     y.balance = precise_round((y.balance + currentTransaction), 2);
     transactionArray.push(`${x.name} donne ${currentTransaction}€ a ${y.name}`);
-    // console.log(`${x.name} donne ${currentTransaction}€ a ${y.name} et il lui reste ${x.balance}`);
   }
 }
 
@@ -78,7 +78,6 @@ const getDivision = (friends) => {
   let transactions = [],
     equalBalance = 0;
   const nbUser = friends.length;
-
 
   friends = friends
     .map((user) => {
@@ -93,7 +92,6 @@ const getDivision = (friends) => {
       balance: precise_round(- friend.amount + (equalBalance / nbUser), 2)
     }));
 
-  console.log(friends)
   friends.forEach((friend) => {
 
     for (let index = friends.length - 1; index >= 0; index--) {
@@ -105,9 +103,8 @@ const getDivision = (friends) => {
       testIt(friend, currentUser, transactions)
     }
   });
-  console.log(friends)
   return transactions;
 }
 console.log('🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪🟪')
 const result = getDivision(initialState.users)
-console.log('🔥' + result)
+console.log('🔥🔥🔥' + result)

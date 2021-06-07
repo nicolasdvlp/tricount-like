@@ -7,13 +7,13 @@ import './style.scss';
 
 // == Composant
 const Header = () => {
-return (
+  return (
     <Container fluid className="header">
-            <div className='display'>
-                <h1 className='title'>le juste compte</h1>
-            </div>
+      <div className='display'>
+        <h1 className='title'>le juste compte</h1>
+      </div>
     </Container>
-);
+  );
 };
 
 // == Export

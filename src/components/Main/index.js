@@ -1,12 +1,16 @@
 // == Import npm
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Nav, Container } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 // == Import
 import './style.scss';
-import UserList from '../../containers/UserList';
+// import UserList from '';
 import ResultView from '../../containers/Result'
+
+const UserList = lazy(() => import('../../containers/UserList'));
+
+const renderLoader = () => <p>Loading</p>;
 
 // == Composant
 const Main = ({ switchResultPage, clickChangeView }) => {
@@ -31,8 +35,11 @@ const Main = ({ switchResultPage, clickChangeView }) => {
           </Nav.Item>
         </Nav>
       </Container>
+
       {
-        !switchResultPage && <UserList />
+        !switchResultPage && (<Suspense fallback={renderLoader()}>
+          <UserList />
+        </Suspense>)
       }
       {
         switchResultPage && <ResultView />

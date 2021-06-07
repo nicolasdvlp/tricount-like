@@ -10,6 +10,9 @@
     font-size: larger;
     display: flex;
     justify-content: space-between;
+    padding: 0.75rem 0 0.75rem 0.75rem;
+    display: flex;
+    align-items: center;
   }
 
   &__header--left {
@@ -21,8 +24,10 @@
   }
 
   &__header_icons {
-    margin-left: 0.5rem;
     cursor: pointer;
+    height: 48px;
+    width: 48px;
+    padding: 10px;
   }
 
   &__body {
