@@ -3,7 +3,11 @@ import { ResponsiveBar } from '@nivo/bar'
 import PropTypes from 'prop-types'
 
 const MyResponsiveBar = ({ data }) => {
-  console.log('graphdata :', data);
+
+  const theme = {
+    textColor: 'white',
+    fontSize: 16,
+  };
 
   return (
     <ResponsiveBar
@@ -15,6 +19,7 @@ const MyResponsiveBar = ({ data }) => {
       valueScale={{ type: 'linear' }}
       indexScale={{ type: 'band', round: true }}
       colors={bar => bar.data.color}
+      theme={theme}
       defs={[
         {
           id: 'dots',
@@ -41,13 +46,13 @@ const MyResponsiveBar = ({ data }) => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: 'Nom',
+        legend: '',
         legendPosition: 'middle',
         legendOffset: 32
       }}
       axisLeft={{
         tickSize: 5,
-        tickPadding: 5,
+        tickPadding: -5,
         tickRotation: 0,
         legend: 'Montant',
         legendPosition: 'middle',

@@ -12,7 +12,7 @@ const UserList = ({ users, switchModal, addExpense, deleteUserModal, clickDelUse
   <Container className={UserList.name.toLowerCase()}>
     <Row className="justify-content-center userlist--flex">
       <Col className="userlist__buttonlist userlist--flex">
-        <Button block className="buttonlist userlist__buttonlist buttonlist--marge" style={{ color: 'black' }} variant="info" onClick={switchModal}>Ajouter un utilisateur</Button>
+        <Button block className="buttonlist userlist__buttonlist buttonlist--marge" style={{ color: '#212529' }} variant="info" onClick={switchModal}>Ajouter un utilisateur</Button>
         <Button block className="buttonlist userlist__buttonlist buttonlist--marge" variant="warning" onClick={clickDelUsers}>Supprimer tous les utilisateurs</Button>
       </Col>
       <Col>
