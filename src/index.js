@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
 // == Import : local
 import './index.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 // Composants
 import App from './components/Apps';
 // Store
